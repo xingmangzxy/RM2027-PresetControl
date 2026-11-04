@@ -1,0 +1,10 @@
+build/
+release/
+evidence/
+backups/
+history/
+__pycache__/
+*.pyc
+
+.idea/
+.DS_Store

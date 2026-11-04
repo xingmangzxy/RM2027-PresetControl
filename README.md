@@ -13,4 +13,3 @@ Windows 环境需要 Arm GNU Toolchain、CMake、Ninja、GCC/G++、Python 及 Op
 烧录需使用 ST-Link；先断开电调动力并确保舵机机构安全，连接 C 板供电，执行 `powershell -ExecutionPolicy Bypass -File tools/flash.ps1 -MotorPowerDisconnected`。脚本先备份当前固件再写入并校验。构建输出中 `no_actuator_PWM` 为遗留检查字段，不能代表本版本没有 PWM 输出。
 
 代码和依赖保留各自原有许可，请查看 LICENSE 与各依赖目录中的许可文件。
-
