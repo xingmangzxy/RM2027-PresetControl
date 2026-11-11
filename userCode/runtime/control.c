@@ -65,8 +65,8 @@ int rc_byte(Controller *c,uint32_t now,uint8_t b) {
         channels[ch]=(uint16_t)((bits>>shift)&0x7ff);
     }
     int range=1;
-    const unsigned used[]={0,2,3,4,5};
-    for(unsigned n=0;n<5;++n) if(channels[used[n]]<160 || channels[used[n]]>1888) range=0;
+    const unsigned used[]={0,1,2,3,4,5};
+    for(unsigned n=0;n<6;++n) if(channels[used[n]]<160 || channels[used[n]]>1888) range=0;
     if(!footer || (f[23]&0xf0) || !range) {
         ++r->bad_frames; r->healthy=0; r->streak=0;
         stop(c,WHY_RADIO,0);

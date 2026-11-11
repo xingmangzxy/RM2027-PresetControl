@@ -19,9 +19,9 @@ static void pass(const char *s){++scenarios;std::printf("PASS %s\n",s);}
 static const unsigned ids[]={MOTOR_ID_FL,MOTOR_ID_FR,MOTOR_ID_BL,MOTOR_ID_BR};
 static void radio(int sb,int sc,float x,float y,float w,int flags=0){
     uint16_t ch[16];for(auto &v:ch)v=1024;
-    ch[6]=static_cast<uint16_t>(sa_value);ch[1]=static_cast<uint16_t>(1024+left_vertical*660);
-    ch[0]=static_cast<uint16_t>(1024-y*660);ch[2]=static_cast<uint16_t>(1024+x*660);
-    ch[3]=static_cast<uint16_t>(1024-w*660);
+    ch[6]=static_cast<uint16_t>(sa_value);ch[2]=static_cast<uint16_t>(1024+left_vertical*660);
+    ch[1]=static_cast<uint16_t>(1024-y*660);ch[3]=static_cast<uint16_t>(1024+x*660);
+    ch[0]=static_cast<uint16_t>(1024-w*660);
     ch[4]=sb==0 ? 353 : sb==1 ? 1024 : 1695;
     ch[5]=sc==0 ? 353 : sc==1 ? 1024 : 1695;
     uint8_t p[25]={};p[0]=0x0f;p[23]=static_cast<uint8_t>(flags);

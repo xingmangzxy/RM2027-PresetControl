@@ -27,9 +27,11 @@ void _fini(void) {}
 void SysTick_Handler(void) {HAL_IncTick();}
 void HAL_MspInit(void) {__HAL_RCC_SYSCFG_CLK_ENABLE();__HAL_RCC_PWR_CLK_ENABLE();}
 static void fatal(void) {
+    __disable_irq();
+    if(RCC->APB2ENR & RCC_APB2ENR_TIM1EN) TIM1->BDTR &= ~TIM_BDTR_MOE;
     if(hcan1.Instance)hcan1.Instance->TSR=CAN_TSR_ABRQ0|CAN_TSR_ABRQ1|CAN_TSR_ABRQ2;
     if(hcan2.Instance)hcan2.Instance->TSR=CAN_TSR_ABRQ0|CAN_TSR_ABRQ1|CAN_TSR_ABRQ2;
-    __disable_irq();for(;;){}
+    for(;;){}
 }
 void Error_Handler(void) {fatal();}
 void NMI_Handler(void) {fatal();}

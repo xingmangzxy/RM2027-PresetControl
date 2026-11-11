@@ -10,7 +10,8 @@ void PID::Clear(){PIDInfo.errSum=PIDInfo.output=0;}
 float PID::PIDCalc(float target,float feedback) {
     auto &p=PIDInfo;p.ref=target;p.fdb=feedback;
     float err=target-feedback;
-    float lo=target<0 ? -p.outputMax : 0,hi=target>0 ? p.outputMax : 0;
+    float lo=target<0 ? -p.outputMax : -BRAKE_CURRENT_LIMIT;
+    float hi=target>0 ? p.outputMax : BRAKE_CURRENT_LIMIT;
     float candidate=clip(p.errSum+p.ki*err*LOOP_SECONDS,-p.componentKiMax,p.componentKiMax);
     float requested=clip(p.kp*err,-p.componentKpMax,p.componentKpMax)+candidate;
     if((requested>=lo && requested<=hi)||(requested>hi && err<0)||(requested<lo && err>0))p.errSum=candidate;

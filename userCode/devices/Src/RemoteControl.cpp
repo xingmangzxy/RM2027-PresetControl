@@ -16,10 +16,10 @@ static SWITCH_STATE_E level(uint16_t raw) {
     return INVALID_POS;
 }
 void RemoteControl::Update(const Radio &r) {
-    rcInfo.right_rol=axis(r.channel[0])*AXIS_SIGN_Y;
-    rcInfo.left_col=axis(r.channel[1]);
-    rcInfo.right_col=axis(r.channel[2])*AXIS_SIGN_X;
-    rcInfo.left_rol=axis(r.channel[3])*AXIS_SIGN_W;
+    rcInfo.right_rol=axis(r.channel[1])*AXIS_SIGN_Y;
+    rcInfo.left_col=axis(r.channel[2]);
+    rcInfo.right_col=axis(r.channel[3])*AXIS_SIGN_X;
+    rcInfo.left_rol=axis(r.channel[0])*AXIS_SIGN_W;
     rcInfo.sLeft=level(r.channel[4]);rcInfo.sRight=level(r.channel[5]);
 }
 bool RemoteControl::Healthy(const Radio &r,uint32_t now) {

@@ -1,5 +1,5 @@
 /* Diagnostic adaptation of devices/Src/RemoteControl.cpp.
- * Same CH1/2/3/4 -> right_rol/left_col/right_col/left_rol mapping.
+ * Same CH1/2/3/4 -> left_rol/right_rol/left_col/right_col mapping.
  * Frame synchronization and raw 11-bit switch values replace the original DMA
  * buffer toggle and enum cast. This code only observes; it never controls motors. */
 #include "diagnostic.h"
@@ -43,10 +43,10 @@ static int decode(Diagnostic *d,uint32_t now) {
         d->data[D_RC_GOOD]=now;
         if(d->data[D_RC_STREAK]<1000)++d->data[D_RC_STREAK];
     }
-    d->data[D_RIGHT_ROL]=normalized(d->data[D_CHANNEL]);
-    d->data[D_LEFT_COL]=normalized(d->data[D_CHANNEL+1]);
-    d->data[D_RIGHT_COL]=normalized(d->data[D_CHANNEL+2]);
-    d->data[D_LEFT_ROL]=normalized(d->data[D_CHANNEL+3]);
+    d->data[D_RIGHT_ROL]=normalized(d->data[D_CHANNEL+1]);
+    d->data[D_LEFT_COL]=normalized(d->data[D_CHANNEL+2]);
+    d->data[D_RIGHT_COL]=normalized(d->data[D_CHANNEL+3]);
+    d->data[D_LEFT_ROL]=normalized(d->data[D_CHANNEL]);
     d->data[D_SB]=switch_level(d->data[D_CHANNEL+4]);
     d->data[D_SC]=switch_level(d->data[D_CHANNEL+5]);
     return 1;

@@ -22,8 +22,8 @@ int main(void) {
     for(unsigned i=0;i<16;++i)CHECK(d.data[D_CHANNEL+i]==ch[i]);
     CHECK((int32_t)d.data[D_RIGHT_ROL]==-1000);
     CHECK((int32_t)d.data[D_LEFT_COL]==-1000);
-    CHECK((int32_t)d.data[D_RIGHT_COL]==-1000);
-    CHECK((int32_t)d.data[D_LEFT_ROL]==-976);
+    CHECK((int32_t)d.data[D_RIGHT_COL]==-976);
+    CHECK((int32_t)d.data[D_LEFT_ROL]==-1000);
     diag_tick(&d,129);CHECK(!d.data[D_RC_ONLINE]);
     for(unsigned f=1;f<=3;++f) {
         packet(p,ch,(uint8_t)(f<<2),0);feed(&d,150+f,p);
@@ -32,8 +32,8 @@ int main(void) {
     ch[0]=1695;ch[1]=353;ch[2]=1024;ch[3]=1695;ch[4]=353;ch[5]=1024;
     packet(p,ch,0,0);feed(&d,200,p);feed(&d,214,p);feed(&d,228,p);
     CHECK(d.data[D_RC_ONLINE]);CHECK(d.data[D_SB]==1);CHECK(d.data[D_SC]==2);
-    CHECK(d.data[D_RIGHT_ROL]==1000);CHECK(d.data[D_RIGHT_COL]==0);
-    CHECK((int32_t)d.data[D_LEFT_COL]==-1000);CHECK(d.data[D_LEFT_ROL]==1000);
+    CHECK((int32_t)d.data[D_RIGHT_ROL]==-1000);CHECK(d.data[D_RIGHT_COL]==1000);
+    CHECK(d.data[D_LEFT_COL]==0);CHECK(d.data[D_LEFT_ROL]==1000);
     ch[4]=1695;ch[5]=0;packet(p,ch,0,0);feed(&d,242,p);
     CHECK(d.data[D_SB]==3);CHECK(d.data[D_SC]==0);
     diag_uart_error(&d);CHECK(!d.data[D_RC_ONLINE]);CHECK(d.data[D_UART_ERRORS]==1);
